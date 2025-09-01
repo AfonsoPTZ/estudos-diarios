@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OlwSchool — Cadastro</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body{background:#f5f6f8}
+    .card-wrap{max-width:720px;margin:5vh auto}
+    .brand{display:flex;align-items:center;gap:.5rem;justify-content:center;margin-top:20px}
+    .brand img{width:36px;height:36px}
+    .muted{color:#6c757d}
+    .req::after{content:" *"; color:#dc3545;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Marca -->
+    <div class="brand">
+      <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f989.svg" alt="Coruja">
+      <h1 class="h4 m-0">OlwSchool</h1>
+    </div>
+
+    <!-- Card -->
+    <div class="card shadow-sm card-wrap">
+      <div class="card-body">
+        <h2 class="h5 text-center mb-3">Criar conta</h2>
+
+        <!-- Perfil -->
+        <div class="mb-3">
+          <label class="form-label req">Perfil</label>
+          <div class="d-flex flex-wrap gap-3">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="perfil" id="pAluno" value="aluno" checked>
+              <label class="form-check-label" for="pAluno">Aluno</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="perfil" id="pResp" value="responsavel">
+              <label class="form-check-label" for="pResp">Responsável</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="perfil" id="pProf" value="professor">
+              <label class="form-check-label" for="pProf">Professor</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dados básicos -->
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="nome" class="form-label req">Nome completo</label>
+            <input type="text" class="form-control" id="nome" placeholder="Ex.: Maria Ferreira">
+          </div>
+          <div class="col-md-6">
+            <label for="email" class="form-label req">E-mail</label>
+            <input type="email" class="form-control" id="email" placeholder="maria@email.com">
+          </div>
+          <div class="col-md-6">
+            <label for="tel" class="form-label">Telefone</label>
+            <input type="tel" class="form-control" id="tel" placeholder="(41) 90000-0000">
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <!-- Campos específicos por perfil -->
+        <div id="camposAluno" class="row g-3">
+          <div class="col-md-6">
+            <label for="ra" class="form-label req">RA</label>
+            <input type="text" class="form-control" id="ra" placeholder="123456">
+          </div>
+          <div class="col-md-6">
+            <label for="nasc" class="form-label req">Data de nascimento</label>
+            <input type="date" class="form-control" id="nasc">
+          </div>
+        </div>
+
+        <div id="camposResp" class="row g-3 d-none">
+          <div class="col-md-6">
+            <label for="cpfResp" class="form-label req">CPF</label>
+            <input type="text" class="form-control" id="cpfResp" placeholder="000.000.000-00">
+          </div>
+          <div class="col-md-6">
+            <label for="vinculoRa" class="form-label req">RA do aluno (vínculo)</label>
+            <input type="text" class="form-control" id="vinculoRa" placeholder="RA do aluno">
+          </div>
+        </div>
+
+        <div id="camposProf" class="row g-3 d-none">
+          <div class="col-md-6">
+            <label for="cpfProf" class="form-label req">CPF</label>
+            <input type="text" class="form-control" id="cpfProf" placeholder="000.000.000-00">
+          </div>
+          <div class="col-md-6">
+            <label for="emailInst" class="form-label req">E-mail institucional</label>
+            <input type="email" class="form-control" id="emailInst" placeholder="nome@escola.com.br">
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <!-- Acesso -->
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="senha" class="form-label req">Senha</label>
+            <div class="input-group">
+              <input type="password" class="form-control" id="senha" placeholder="********">
+              <button type="button" class="btn btn-outline-secondary" id="togglePwd">Mostrar</button>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="senha2" class="form-label req">Confirmar senha</label>
+            <input type="password" class="form-control" id="senha2" placeholder="********">
+          </div>
+        </div>
+
+        <!-- LGPD -->
+        <div class="form-check mt-3">
+          <input class="form-check-input" type="checkbox" id="lgpd">
+          <label class="form-check-label" for="lgpd">Aceito a Política de Privacidade (LGPD)</label>
+        </div>
+
+        <!-- Alertas -->
+        <div id="alert" class="alert alert-danger py-2 mt-3 d-none" role="alert"></div>
+        <div id="ok" class="alert alert-success py-2 mt-3 d-none" role="alert">Cadastro enviado (simulado). Verifique seu e-mail.</div>
+
+        <!-- Ações -->
+        <div class="d-grid gap-2 mt-3">
+          <button class="btn btn-primary" id="btnCadastrar">Criar conta</button>
+          <a class="btn btn-link" href="login.html">Já tem conta? Entrar</a>
+        </div>
+      </div>
+    </div>
+
+    <footer class="text-center mt-2 muted">
+      © 2025 OlwSchool • <a href="#">Ajuda</a> • <a href="#">Contato</a> • <a href="#">Privacidade</a>
+    </footer>
+  </div>
+
+  <script>
+    // Alterna campos por perfil
+    const pAluno = document.getElementById('pAluno');
+    const pResp  = document.getElementById('pResp');
+    const pProf  = document.getElementById('pProf');
+
+    const secAluno = document.getElementById('camposAluno');
+    const secResp  = document.getElementById('camposResp');
+    const secProf  = document.getElementById('camposProf');
+
+    function mostrarSecao() {
+      secAluno.classList.toggle('d-none', !pAluno.checked);
+      secResp.classList.toggle('d-none', !pResp.checked);
+      secProf.classList.toggle('d-none', !pProf.checked);
+    }
+    [pAluno, pResp, pProf].forEach(r => r.addEventListener('change', mostrarSecao));
+    mostrarSecao();
+
+    // Mostrar/ocultar senha
+    const senha = document.getElementById('senha');
+    const senha2 = document.getElementById('senha2');
+    document.getElementById('togglePwd').addEventListener('click', (e) => {
+      const isPwd = senha.type === 'password';
+      senha.type = isPwd ? 'text' : 'password';
+      senha2.type = isPwd ? 'text' : 'password';
+      e.target.textContent = isPwd ? 'Ocultar' : 'Mostrar';
+    });
+
+    // Validação simples (simulada)
+    document.getElementById('btnCadastrar').addEventListener('click', () => {
+      const alert = document.getElementById('alert');
+      const ok = document.getElementById('ok');
+      alert.classList.add('d-none'); ok.classList.add('d-none');
+
+      const perfil = pAluno.checked ? 'aluno' : (pResp.checked ? 'responsavel' : 'professor');
+      const nome = document.getElementById('nome').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const lgpd = document.getElementById('lgpd').checked;
+
+      if (!nome || !email) {
+        alert.textContent = 'Preencha nome e e-mail.'; alert.classList.remove('d-none'); return;
+      }
+      if (!senha.value || senha.value.length < 6) {
+        alert.textContent = 'Senha precisa ter pelo menos 6 caracteres.'; alert.classList.remove('d-none'); return;
+      }
+      if (senha.value !== senha2.value) {
+        alert.textContent = 'As senhas não conferem.'; alert.classList.remove('d-none'); return;
+      }
+      // Campos específicos
+      if (perfil === 'aluno') {
+        if (!document.getElementById('ra').value.trim() || !document.getElementById('nasc').value) {
+          alert.textContent = 'Informe RA e data de nascimento.'; alert.classList.remove('d-none'); return;
+        }
+      }
+      if (perfil === 'responsavel') {
+        if (!document.getElementById('cpfResp').value.trim() || !document.getElementById('vinculoRa').value.trim()) {
+          alert.textContent = 'Informe CPF e RA do aluno (vínculo).'; alert.classList.remove('d-none'); return;
+        }
+      }
+      if (perfil === 'professor') {
+        if (!document.getElementById('cpfProf').value.trim() || !document.getElementById('emailInst').value.trim()) {
+          alert.textContent = 'Informe CPF e e-mail institucional.'; alert.classList.remove('d-none'); return;
+        }
+      }
+      if (!lgpd) {
+        alert.textContent = 'Você precisa aceitar a Política de Privacidade (LGPD).'; alert.classList.remove('d-none'); return;
+      }
+
+      // Sucesso simulado
+      ok.classList.remove('d-none');
+      console.log('Cadastro OK (simulado). Enviar POST ao backend aqui.');
+      // Ex.: fetch('/api/cadastro', { method:'POST', body:FormData(...) })
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OlwSchool — Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body{background:#f5f6f8}
+    .login-card{max-width:420px;margin:6vh auto}
+    .brand{display:flex;align-items:center;gap:.5rem;justify-content:center;margin-top:24px}
+    .brand img{width:36px;height:36px}
+    .muted{color:#6c757d;font-size:.92rem}
+    footer{font-size:.9rem;color:#6c757d}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="brand">
+      <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f989.svg" alt="Coruja">
+      <h1 class="h4 m-0">OlwSchool</h1>
+    </div>
+
+    <div class="card shadow-sm login-card">
+      <div class="card-body">
+        <h2 class="h5 text-center mb-4">Entrar no Sistema</h2>
+
+        <!-- Perfil -->
+        <div class="mb-3">
+          <label class="form-label">Perfil</label>
+          <div class="d-flex gap-3">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="perfil" id="perfilAluno" value="aluno" checked>
+              <label class="form-check-label" for="perfilAluno">Aluno</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="perfil" id="perfilResp" value="responsavel">
+              <label class="form-check-label" for="perfilResp">Responsável</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="perfil" id="perfilProf" value="professor">
+              <label class="form-check-label" for="perfilProf">Professor</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Identificação -->
+        <div class="mb-3">
+          <label for="ident" class="form-label">Identificação (RA ou E-mail)</label>
+          <input type="text" class="form-control" id="ident" placeholder="Ex.: 123456 ou prof@escola.com">
+        </div>
+
+        <!-- Senha com toggle -->
+        <div class="mb-2">
+          <label for="senha" class="form-label">Senha</label>
+          <div class="input-group">
+            <input type="password" class="form-control" id="senha" placeholder="********">
+            <button class="btn btn-outline-secondary" type="button" id="togglePwd">Mostrar</button>
+          </div>
+        </div>
+
+        <!-- Lembrar-me -->
+        <div class="form-check mb-3">
+          <input class="form-check-input" type="checkbox" id="lembrar">
+          <label class="form-check-label" for="lembrar">Lembrar-me</label>
+        </div>
+
+        <!-- Alert / erros -->
+        <div id="alert" class="alert alert-danger py-2 d-none" role="alert">
+          Credenciais inválidas. Verifique seu perfil, identificação e senha.
+        </div>
+
+        <!-- Ações -->
+        <div class="d-grid gap-2">
+          <button class="btn btn-primary" id="entrar">Entrar</button>
+          <a href="#" class="btn btn-link">Esqueci a senha</a>
+        </div>
+
+        <hr class="my-4">
+
+        <p class="muted mb-1"><strong>Primeiro acesso?</strong></p>
+        <ul class="muted mb-0">
+          <li>Aluno: use RA + senha inicial fornecida.</li>
+          <li>Responsável: CPF + código do aluno (primeiro acesso).</li>
+          <li>Professor: e-mail institucional.</li>
+        </ul>
+      </div>
+    </div>
+
+    <footer class="text-center mt-3">
+      © 2025 OlwSchool • <a href="#">Ajuda</a> • <a href="#">Contato</a> • <a href="#">Privacidade</a>
+    </footer>
+  </div>
+
+  <script>
+    // Mostrar/ocultar senha
+    const senha = document.getElementById('senha');
+    const toggle = document.getElementById('togglePwd');
+    toggle.addEventListener('click', () => {
+      const isPwd = senha.type === 'password';
+      senha.type = isPwd ? 'text' : 'password';
+      toggle.textContent = isPwd ? 'Ocultar' : 'Mostrar';
+    });
+
+    // Simulação básica de validação (trocar por backend depois)
+    document.getElementById('entrar').addEventListener('click', () => {
+      const ident = document.getElementById('ident').value.trim();
+      const pass  = senha.value.trim();
+      const alert = document.getElementById('alert');
+      if (!ident || !pass) {
+        alert.textContent = 'Preencha identificação e senha.';
+        alert.classList.remove('d-none');
+        return;
+      }
+      // Exemplo de sucesso (substituir por POST real):
+      alert.classList.add('d-none');
+      // window.location.href = '/dashboard'; // futuro
+      console.log('Login OK (simulado).');
+    });
+  </script>
+</body>
+</html>
